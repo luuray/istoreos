@@ -254,3 +254,11 @@ $(call Device/rk3568_combined_nlnet)
   DEVICE_DTS := rk3568-xgp rk3568-xgp-v3
 endef
 TARGET_DEVICES += nlnet_xgp
+
+define Device/ternario_router
+$(call Device/rk3568)
+  DEVICE_VENDOR := terNario
+  DEVICE_MODEL := Router
+  DEVICE_DTS := rk3568-tnb-router
+endef
+TARGET_DEVICES += ternario_router
