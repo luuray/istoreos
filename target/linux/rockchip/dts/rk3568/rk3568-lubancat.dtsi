@@ -6,10 +6,14 @@
 
 /dts-v1/;
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pwm/pwm.h>
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/pinctrl/rockchip.h>
-#include "../rockchip-drm-vvop.dtsi"
+#include <dt-bindings/input/rk-input.h>
+#include <dt-bindings/display/drm_mipi_dsi.h>
+#include <dt-bindings/sensor-dev.h>
 #include "rk3568.dtsi"
+#include "../rockchip-drm-vvop.dtsi"
 
 /delete-node/ &gmac0;
 /delete-node/ &gmac1;
