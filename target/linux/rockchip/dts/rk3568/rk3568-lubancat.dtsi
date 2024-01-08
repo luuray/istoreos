@@ -8,7 +8,7 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/pinctrl/rockchip.h>
-#include <dt-bindings/soc/rockchip,vop2.h>
+#include "../rockchip-drm-vvop.dtsi"
 #include "rk3568.dtsi"
 
 /delete-node/ &gmac0;
