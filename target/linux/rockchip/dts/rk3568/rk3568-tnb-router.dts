@@ -12,8 +12,8 @@
 #include "rk3568-lubancat.dtsi"
 
 / {
-    model = "terNario Router";
-    compatible = "ternario,router", "rockchip,rk3568";
+    model = "terNario Navigator";
+    compatible = "ternario,tnb-router", "rockchip,rk3568";
 
     aliases {
         ethernet0 = &gmac0;
@@ -475,8 +475,8 @@
 
     snps,reset-gpio = <&gpio1 RK_PA1 GPIO_ACTIVE_LOW>;
     snps,reset-active-low;
-    /* Reset time is 10ms, 50ms for 88e1512 */
-    snps,reset-delays-us = <0 10000 50000>;
+    /* Reset time is 20ms, 100ms for rtl8211f */
+    snps,reset-delays-us = <0 20000 100000>;
 
     assigned-clocks = <&cru SCLK_GMAC0_RX_TX>, <&cru SCLK_GMAC0>;
     assigned-clock-parents = <&cru SCLK_GMAC0_RGMII_SPEED>, <&cru CLK_MAC0_2TOP>;
@@ -492,13 +492,13 @@
     rx_delay = <0x08>;
 
     phy-handle = <&rgmii_phy0>;
-    compatible = "marvell,88e1512";
     status = "okay";
 };
 
 &mdio0 {
     rgmii_phy0: phy@0 {
-        compatible = "ethernet-phy-ieee802.3-c22";
+        //compatible = "ethernet-phy-ieee802.3-c22";
+        compatible = "marvell,88e1512";
         reg = <0x0>;
     };
 };
@@ -510,8 +510,8 @@
 
     snps,reset-gpio = <&gpio0 RK_PC7 GPIO_ACTIVE_LOW>;
     snps,reset-active-low;
-    /* Reset time is 10ms, 50ms for 88e1512 */
-    snps,reset-delays-us = <0 10000 50000>;
+    /* Reset time is 20ms, 100ms for rtl8211f */
+    snps,reset-delays-us = <0 20000 100000>;
 
     assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
     assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>, <&cru CLK_MAC1_2TOP>;
@@ -527,13 +527,13 @@
     rx_delay = <0x00>;
 
     phy-handle = <&rgmii_phy1>;
-    compatible = "marvell,88e1512";
     status = "okay";
 };
 
 &mdio1 {
     rgmii_phy1: phy@0 {
-        compatible = "ethernet-phy-ieee802.3-c22";
+        //compatible = "ethernet-phy-ieee802.3-c22";
+        compatible = "marvell,88e1512";
         reg = <0x0>;
     };
 };
@@ -548,6 +548,7 @@
     reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
     vpcie3v3-supply = <&vcc3v3_pcie>;
     status = "okay";
+
     pcie@10 {
         reg = <0x00100000 0 0 0 0>;
         #address-cells = <3>;
@@ -556,6 +557,13 @@
         lan743x_1: pcie-eth@10,0 {
             compatible = "microchip,lan743x";
             reg = <0x000000 0 0 0 0>;
+
+            phy-connection-type = "rgmii";
+
+            fixed-link {
+                speed = <1000>;
+                full-duplex;
+            };
         };
     };
 };
@@ -696,7 +704,7 @@
 
 &sata0 {
     target-supply = <&sata_power>;
-    status = "disabled";
+    status = "okay";
 };
 
 /* USB3.0 Host */
